@@ -113,7 +113,7 @@
   <div class="pill">Chết ở màn này: <b id="levelDeathCount">0</b></div>
   <div class="pill">Màn: <b id="levelCount">1</b>/<span id="levelTotal">3</span></div>
 </div>
-<div id="hint">Di chuyển: ← → hoặc A D · Nhảy: SPACE / ↑ / W · Ghi chú: từ màn 4 trở đi phải nhặt 💎 kim cương thì mới qua màn được (màn 6 có thể nhấn đúp để nhảy 2 lần)</div>
+<div id="hint">Di chuyển: ← → hoặc A D · Nhảy: SPACE / ↑ / W · Ghi chú: từ màn 4 trở đi phải nhặt 💎 kim cương thì mới qua màn được (từ màn 3 trở đi có thể nhấn đúp để nhảy 2 lần)</div>
 
 <div id="wrap">
   <canvas id="game" width="960" height="540"></canvas>
@@ -207,6 +207,7 @@ const LEVELS = [
   // ---------------- MÀN 3 ----------------
   {
     playerStart: {x: 40, y: 400},
+    allowDoubleJump: true,
     blocks: [
       {type:'ground', x:0,   y:480, w:260, h:60},
       {type:'spike',  x:260, y:460, w:40,  h:20},
@@ -231,6 +232,7 @@ const LEVELS = [
   // GHI CHÚ: từ màn này trở đi, phải nhặt kim cương 💎 thì cờ đích mới hoạt động.
   {
     playerStart: {x: 40, y: 400},
+    allowDoubleJump: true,
     blocks: [
       // --- khởi động, chọn hướng ---
       {type:'ground', x:0,   y:480, w:180, h:60},
@@ -282,6 +284,7 @@ const LEVELS = [
   // phải chạm nó rồi QUAY LẠI cờ thật đứng ngay bên cạnh mới thật sự qua màn.
   {
     playerStart: {x: 40, y: 400},
+    allowDoubleJump: true,
     blocks: [
       {type:'ground', x:0,   y:480, w:200, h:60},
 
