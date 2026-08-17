@@ -477,8 +477,9 @@ const LEVELS = [
       {type:'ground', x:2070,y:480, w:150, h:60},
       {type:'spike',  x:2220, y:460, w:34, h:20, moveAxis:'x', moveDist:50, moveSpeed:0.055},
       {type:'ground', x:2350,y:480, w:150, h:60},
-      {type:'fakegoal', x:2420, y:420, w:40, h:60},
-      {type:'ground', x:2500,y:480, w:150, h:60},
+      {type:'ground', x:2520,y:480, w:100, h:60},
+      {type:'fakegoal', x:2580, y:420, w:40, h:60},
+      {type:'ground', x:2650,y:480, w:210, h:60},
 
       // ===== TẦNG TRÊN =====
       {type:'ground', x:60,  y:260, w:100, h:20},
@@ -497,8 +498,8 @@ const LEVELS = [
       {type:'diamond', x:1540, y:200, w:26, h:26, required:true},
 
       // đích thật nằm ở tầng dưới, sau cờ giả
-      {type:'ground', x:2650,y:480, w:170, h:60},
-      {type:'goal',   x:2760,y:420, w:40,  h:60}
+      {type:'ground', x:2860,y:480, w:160, h:60},
+      {type:'goal',   x:2990,y:420, w:40,  h:60}
     ]
   },
   // ---------------- MÀN 9 (3 tầng, dày đặc bẫy di chuyển) ----------------
@@ -795,12 +796,23 @@ function playerHitRect(){
 }
 function getLethalRect(b){
   if(b.type==='spike' || b.type==='hidden'){
-    // gai là hình tam giác — thu nhỏ nhiều ở trên (đỉnh nhọn) và hai bên
-    return shrinkRect(b, b.w*0.2, b.h*0.4);
+    // Vùng chết phải khớp với hình gai thật hơn: không quá nhỏ như trước,
+    // nhưng vẫn hơi thu nhỏ để tránh chết oan ở mép khung.
+    return {
+      x: b.x + 4,
+      y: b.y + 4,
+      w: Math.max(12, b.w - 8),
+      h: Math.max(10, b.h - 6)
+    };
   }
   if(b.type==='fakegoal'){
-    // cờ chỉ là que + lá cờ mỏng, không phải cả khối vuông
-    return shrinkRect(b, b.w*0.32, 2);
+    // Cờ giả chỉ là phần thân + lá cờ, không cần cả khối vuông lớn như trước.
+    return {
+      x: b.x + 6,
+      y: b.y + 5,
+      w: Math.max(22, b.w - 12),
+      h: Math.max(18, b.h - 12)
+    };
   }
   return b;
 }
